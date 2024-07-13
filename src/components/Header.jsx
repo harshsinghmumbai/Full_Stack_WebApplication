@@ -19,7 +19,7 @@ const Header = () => {
   ];
   return (
     <>
-      <header className="flex p-2 border-b-2 justify-between items-center border-gray-500 md:px-5 lg:px-9 rounded-lg">
+      <header className="flex p-2 border-b-2 justify-between items-center border-gray-500 md:px-5 lg:px-9 rounded-lg sticky top-0 z-30 bg-white/20 dark:bg-black/20 backdrop-blur-sm">
         <div className="block md:hidden">
           <Sheet>
             <SheetTrigger asChild>
@@ -34,16 +34,16 @@ const Header = () => {
                 </Link>
               </SheetHeader>
               <nav className="mt-3 ">
-                <ul className="text-lg font-semibold font-serif">
+                <ul className="text-lg font-semibold font-serif pt-3">
                   {li.map((item, id) => {
                     const { title, route } = item;
                     return (
                       <Link
                         href={route}
                         key={id}
-                        className="focus:text-red-600 mb-5"
+                        className="focus:text-red-600"
                       >
-                        <li>{title}</li>
+                        <li className="mb-2">{title}</li>
                       </Link>
                     );
                   })}
