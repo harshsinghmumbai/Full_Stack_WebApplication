@@ -1,7 +1,9 @@
+import MovieData from "@/components/MovieData";
+
 const movie = () => {
   return (
     <>
-      <div className="">movie</div>
+      <MovieData />
     </>
   );
 };

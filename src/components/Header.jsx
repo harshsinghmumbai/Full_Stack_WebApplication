@@ -23,7 +23,7 @@ const Header = () => {
         <div className="block md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <GiHamburgerMenu className="text-2xl md:hidden" />
+              <GiHamburgerMenu className="text-2xl font-bold md:hidden" />
             </SheetTrigger>
             <SheetContent side={"left"} className="p-10">
               <SheetHeader>
