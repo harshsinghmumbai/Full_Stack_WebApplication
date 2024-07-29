@@ -9,7 +9,7 @@ const Skeleton_Movie = () => {
           .map((items, id) => {
             return (
               <div className="p-4 my-5" key={id}>
-                <div className="w-full max-w-[450px] md:max-w-[300px] rounded-md border dark:border-0  border-gray-300 mx-auto">
+                <div className="w-full max-w-[450px] md:max-w-[300px] rounded-md border dark:border-2  border-gray-600 mx-auto">
                   <Skeleton className="w-full h-40" />
                   <div className="p-4">
                     <Skeleton className="w-full h-6" />

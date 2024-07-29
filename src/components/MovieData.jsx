@@ -48,7 +48,7 @@ const MovieData = () => {
                     <Image
                       src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
                       alt="Laptop"
-                      className="h-[200px] w-full rounded-t-md object-cover "
+                      className="h-[200px] w-full rounded-t-md object-cover"
                       priority
                       width={100}
                       height={100}
