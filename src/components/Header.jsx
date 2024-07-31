@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Header = () => {
   const li = [
@@ -71,7 +72,10 @@ const Header = () => {
         </nav>
         <div className="flex justify-center items-center space-x-3 md:space-x-7">
           <ModeToggle />
-          <CgProfile className="text-3xl " />
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="profile" />
+            <AvatarFallback>HS</AvatarFallback>
+          </Avatar>
         </div>
       </header>
     </>

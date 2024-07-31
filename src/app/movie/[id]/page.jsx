@@ -4,7 +4,9 @@ const dynamic_page = ({ params }) => {
   const id = params.id;
   return (
     <>
-      <Dynamic_Movie id={id} />
+      <div className="max-w-[1200px] m-auto">
+        <Dynamic_Movie id={id} />
+      </div>
     </>
   );
 };
