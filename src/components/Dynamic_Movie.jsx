@@ -6,12 +6,20 @@ import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
 import { Toggle } from "@/components/ui/toggle";
 import { useRouter } from "next/navigation";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import Skeleton_Dynamic_movie from "./Skeleton_Dynamic_movie";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Dynamic_Movie = ({ id }) => {
   const unique = id;
@@ -21,11 +29,11 @@ const Dynamic_Movie = ({ id }) => {
   const [home, setHome] = useState([]);
   const [lang, setLang] = useState([]);
   const [production, setProduction] = useState([]);
+  const [season, setSeason] = useState([]);
   const [productionCountry, setProductionCountry] = useState([]);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   console.log(data);
-  console.log("genres", genres);
 
   const GoBack = () => {
     router.back();
@@ -48,8 +56,8 @@ const Dynamic_Movie = ({ id }) => {
       setdata(data);
       setCreator(data.created_by);
       setGenres(data.genres);
-      console.log("clg", data.genres);
       setHome(data.homepage);
+      setSeason(data.seasons);
       setLang(data.spoken_languages);
       setProduction(data.production_companies);
       setProductionCountry(data.production_countries);
@@ -73,16 +81,25 @@ const Dynamic_Movie = ({ id }) => {
             width={100}
             height={100}
             priority
-            className="h-full w-full md:h-[500px] md:w-[350px] rounded-md object-cover md:mb-[20rem]"
+            className="h-full w-full md:h-[500px] md:w-[350px] lg:w-[500px] lg:h-[550px] rounded-md object-cover md:mb-[20rem]"
           />
-          <div className="p-2 md:pl-10">
+          <div className="p-2 md:p-0 md:pl-10">
             <div className="flex justify-start items-center space-x-2 md:space-x-6 h-full">
-              <Toggle className="md:border md:border-gray-500">
-                <IoArrowBack
-                  className="text-xl md:text-2xl font-extrabold"
-                  onClick={GoBack}
-                />
-              </Toggle>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Toggle className="md:border md:border-gray-500">
+                      <IoArrowBack
+                        className="text-xl md:text-2xl font-extrabold"
+                        onClick={GoBack}
+                      />
+                    </Toggle>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Previous Page</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               <h1 className="text-xl font-semibold text-center sm:text-2xl">
                 {data.original_name}
               </h1>
@@ -232,6 +249,64 @@ const Dynamic_Movie = ({ id }) => {
                 </div>
               </div>
             )}
+            {season.length === 0 ? (
+              ""
+            ) : (
+              <div className="relative top-5 max-w-[850px] w-[300px] sm:w-[620px] md:w-[378px] lg:w-[580px] space-y-12">
+                <p className="my-3 text-lg text-left font-semibold sm:text-xl">
+                  Seasons of {data.original_name}
+                </p>
+                <Carousel
+                  opts={{
+                    align: "start",
+                  }}
+                  className=""
+                >
+                  <CarouselContent className="flex">
+                    {season.map((elem) => {
+                      const { id, poster_path, name } = elem;
+                      return (
+                        <CarouselItem
+                          key={id}
+                          className=" basis-[30%] w-fit sm:basis-[23%] md:basis-[30%] lg:basis-[29%] mb-10"
+                        >
+                          {poster_path === null ? (
+                            <Image
+                              src="/Images/empty.png"
+                              alt="empty_img"
+                              width={100}
+                              height={100}
+                              priority
+                              className="rounded-xl border border-gray-500 w-24 sm:w-40 sm:h-40 h-24  object-cover"
+                            />
+                          ) : (
+                            <Image
+                              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                              alt="Creator"
+                              width={100}
+                              height={100}
+                              priority
+                              className="rounded-xl border border-gray-500 w-24 sm:w-40 sm:h-40 h-24  object-cover"
+                            />
+                          )}
+                          {name === "" ? (
+                            "Not Available"
+                          ) : (
+                            <span className="sm:text-xs font-semibold">
+                              {name}
+                            </span>
+                          )}
+                        </CarouselItem>
+                      );
+                    })}
+                  </CarouselContent>
+                  <div className="absolute top-[-25px] left-[85%] sm:left-[92%] md:left-[85%] lg:left-[92%]">
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </div>
+                </Carousel>
+              </div>
+            )}
             {productionCountry.length === 0 ? (
               ""
             ) : (
@@ -249,13 +324,17 @@ const Dynamic_Movie = ({ id }) => {
                 })}
               </div>
             )}
-            <Link
-              href={home}
-              target="_blank"
-              className="flex justify-end sm:text-base"
-            >
-              <Badge variant="destructive">Get More Info</Badge>
-            </Link>
+            {home === "" ? (
+              ""
+            ) : (
+              <Link
+                href={home}
+                target="_blank"
+                className="flex justify-end sm:text-base"
+              >
+                <Badge variant="destructive">Get More Info</Badge>
+              </Link>
+            )}
           </div>
         </div>
       )}

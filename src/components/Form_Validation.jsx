@@ -19,7 +19,7 @@ const Form_Validation = () => {
   const onSubmit = () => {};
   return (
     <>
-      <div className="">
+      <div>
         <h1 className="text-2xl capitalize md:text-3xl text-center mb-5 lg:text-4xl font-semibold">
           Contact with me
         </h1>
