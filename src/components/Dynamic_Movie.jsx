@@ -252,15 +252,14 @@ const Dynamic_Movie = ({ id }) => {
             {season.length === 0 ? (
               ""
             ) : (
-              <div className="relative top-5 max-w-[850px] w-[300px] sm:w-[620px] md:w-[378px] lg:w-[580px] space-y-12">
-                <p className="my-3 text-lg text-left font-semibold sm:text-xl">
+              <div className="relative top-5 w-[300px] sm:w-[620px] md:w-[378px] lg:w-[580px] space-y-12">
+                <p className="text-lg font-semibold sm:text-xl">
                   Seasons of {data.original_name}
                 </p>
                 <Carousel
                   opts={{
                     align: "start",
                   }}
-                  className=""
                 >
                   <CarouselContent className="flex">
                     {season.map((elem) => {
@@ -268,7 +267,7 @@ const Dynamic_Movie = ({ id }) => {
                       return (
                         <CarouselItem
                           key={id}
-                          className=" basis-[30%] w-fit sm:basis-[23%] md:basis-[30%] lg:basis-[29%] mb-10"
+                          className="basis-[30%] w-fit sm:basis-[23%] md:basis-[30%] lg:basis-[29%] mb-10"
                         >
                           {poster_path === null ? (
                             <Image

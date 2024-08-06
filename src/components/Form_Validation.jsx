@@ -12,11 +12,85 @@ import { useForm } from "react-hook-form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+
+const ZodValidation = z.object({
+  name: z
+    .string()
+    .min(3, { message: "Name must contain least 3 character" })
+    .max(50, { message: "Name must contain at maximum 50 character" }),
+  email: z.string().email(),
+  message: z
+    .string()
+    .min(10, { message: "Message must contain at least 10 character" })
+    .max(500, { message: "Message must contain at maximum 500 character" }),
+});
 
 const Form_Validation = () => {
-  const form = useForm();
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit = () => {};
+  const form = useForm({
+    /*whom through validate*/ resolver: zodResolver(ZodValidation),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (value) => {
+    setLoading(true);
+    try {
+      const name = value.name;
+      const email = value.email;
+      const message = value.message;
+
+      const userExist = await fetch("/api/userExits", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const { user } = await userExist.json();
+
+      if (user) {
+        setLoading(false);
+        return toast(`${email}`, {
+          description:
+            "Above Email Id Already send feedback to Us! Try to Send Feedback with another Email Id",
+          className:
+            "group-[.toaster]:border-2 group-[.toaster]:border-red-400 group-[.toaster]:bg-red-200",
+        });
+      }
+      const register = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (register.ok) {
+        form.reset();
+        setLoading(false);
+        return toast(`${name}`, {
+          description: "Your Feedback successfully received Us!",
+          className:
+            "group-[.toaster]:border-2 group-[.toaster]:border-green-400 group-[.toaster]:bg-green-200",
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
+        });
+      } else {
+        console.log("Connecting Client to Server Error");
+      }
+    } catch (error) {
+      console.log("Error on Form Validation side", error);
+    }
+  };
   return (
     <>
       <div>
@@ -40,12 +114,12 @@ const Form_Validation = () => {
                 name="email"
                 label="Email"
                 placeholder="Enter the Email"
-                // description="At least 3 Characters"
+                description="Above Email You can send for Feedback only one time"
                 formControl={form.control}
               />
               <FormField
                 control={form.control}
-                name="description"
+                name="message"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base md:text-lg text-blue-700">
@@ -53,21 +127,36 @@ const Form_Validation = () => {
                     </FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Enter Description"
+                        placeholder="Enter Your Message"
                         className="resize-none"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter valid Description according to you
+                      Enter Valid Message according to you
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full text-base" size="lg">
-                Submit
-              </Button>
+              {loading ? (
+                <Button
+                  disabled
+                  className="w-full text-base dark:bg-[#60a5fa] bg-[#1e40af] md:text-lg"
+                  size="lg"
+                >
+                  Please wait
+                  <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  className="w-full text-base dark:bg-[#60a5fa] bg-[#1e40af] md:text-lg"
+                  size="lg"
+                >
+                  Submit
+                </Button>
+              )}
             </form>
           </Form>
         </div>
@@ -102,9 +191,7 @@ const SignupFormField = ({
               {...field}
             />
           </FormControl>
-          {/* showing error message */}
-          {description && <FormDescription>{description}</FormDescription>}
-          {/* above commit kiva hua part show karvana  */}
+          <FormDescription>{description}</FormDescription>
           <FormMessage className="text-xs md:text-sm " />
         </FormItem>
       )}

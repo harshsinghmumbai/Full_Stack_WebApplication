@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
             {children}
             <Footer />
           </main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

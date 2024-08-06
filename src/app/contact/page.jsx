@@ -32,7 +32,7 @@ const contact = () => {
           height="450"
           allowFullScreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade"
           className="m-auto rounded-xl border border-black mb-5 w-full h-full sm:h-56 md:h-64 lg:h-96"
         ></iframe>
       </div>
