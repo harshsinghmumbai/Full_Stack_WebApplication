@@ -97,7 +97,7 @@ const Form_Validation = () => {
         <h1 className="text-2xl capitalize md:text-3xl text-center mb-5 lg:text-4xl font-semibold">
           Contact with me
         </h1>
-        <div className="w-[80%] m-auto max-w-[650px] border border-blue-600 rounded-xl p-7 my-5">
+        <div className="w-[80%] m-auto max-w-[650px] border border-blue-600 rounded-xl p-1 md:p-3 lg:p-5 my-5">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}

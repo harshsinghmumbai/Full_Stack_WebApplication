@@ -1,5 +1,7 @@
 import Hero_Section from "@/components/Hero_Section";
 
+export const runtime = "edge";
+
 export default function Home() {
   const data = {
     title: "We're started at Home Page",
