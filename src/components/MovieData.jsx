@@ -23,6 +23,7 @@ const MovieData = () => {
         options
       );
       const data = await response.json();
+      console.log(data);
       setloading(false);
       setMovie(data.results);
     } catch (err) {
@@ -45,14 +46,26 @@ const MovieData = () => {
               <div className="p-4 my-5" key={id}>
                 <Link href={`/movie/${id}`}>
                   <div className="w-full max-w-[450px] md:max-w-[300px] rounded-md border border-gray-500 mx-auto hover:scale-110 transition ease-in-out hover:shadow-2xl hover:shadow-red-500">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                      alt="Laptop"
-                      className="h-[200px] w-full rounded-t-md object-cover"
-                      priority
-                      width={100}
-                      height={100}
-                    />
+                    {poster_path === null ? (
+                      <Image
+                        src="/Images/empty.png"
+                        alt="Not Available"
+                        className="h-[200px] w-full rounded-t-md object-cover"
+                        priority
+                        width={100}
+                        height={100}
+                      />
+                    ) : (
+                      <Image
+                        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                        alt="Laptop"
+                        className="h-[200px] w-full rounded-t-md object-cover"
+                        priority
+                        width={100}
+                        height={100}
+                      />
+                    )}
+
                     <div className="p-4">
                       <h1 className="flex justify-center items-center text-lg font-semibold">
                         {original_name.length > 20

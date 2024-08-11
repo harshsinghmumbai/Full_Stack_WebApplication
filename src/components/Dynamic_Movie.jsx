@@ -31,6 +31,7 @@ const Dynamic_Movie = ({ id }) => {
   const [production, setProduction] = useState([]);
   const [season, setSeason] = useState([]);
   const [productionCountry, setProductionCountry] = useState([]);
+  const [poster, setPoster] = useState([]);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
@@ -60,6 +61,7 @@ const Dynamic_Movie = ({ id }) => {
       setLang(data.spoken_languages);
       setProduction(data.production_companies);
       setProductionCountry(data.production_countries);
+      setPoster(data.poster_path);
     } catch (error) {
       console.log("Error on Dynamic_Movie Component side ", error);
     }
@@ -74,14 +76,25 @@ const Dynamic_Movie = ({ id }) => {
         <Skeleton_Dynamic_movie />
       ) : (
         <div className="p-3 flex flex-col items-center md:flex md:flex-row rounded-md lg:flex lg:justify-center lg:items-center">
-          <Image
-            src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
-            alt="Laptop"
-            width={100}
-            height={100}
-            priority
-            className="h-full w-full md:h-[500px] md:w-[350px] lg:w-[500px] lg:h-[550px] rounded-md object-cover md:mb-[20rem]"
-          />
+          {poster === null ? (
+            <Image
+              src="/Images/empty.png"
+              alt="empty_img"
+              width={100}
+              height={100}
+              priority
+              className="h-full w-full md:h-[500px] md:w-[300px] lg:w-[400px] lg:h-[550px] rounded-md object-cover md:mb-[20rem]"
+            />
+          ) : (
+            <Image
+              src={`https://image.tmdb.org/t/p/w500/${poster}`}
+              alt="Laptop"
+              width={100}
+              height={100}
+              priority
+              className="h-full w-full md:h-[500px] md:w-[350px] lg:w-[500px] lg:h-[550px] rounded-md object-cover md:mb-[20rem]"
+            />
+          )}
           <div className="p-2 md:p-0 md:pl-10">
             <div className="flex justify-start items-center space-x-2 md:space-x-6 h-full">
               <TooltipProvider>
