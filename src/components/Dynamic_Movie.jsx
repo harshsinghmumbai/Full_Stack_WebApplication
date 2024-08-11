@@ -52,6 +52,7 @@ const Dynamic_Movie = ({ id }) => {
         options
       );
       const data = await response.json();
+      console.log(data);
       setLoading(false);
       setdata(data);
       setCreator(data.created_by);
@@ -119,19 +120,24 @@ const Dynamic_Movie = ({ id }) => {
             <p className="mt-3 text-base text-gray-500 sm:text-lg">
               {data.overview}
             </p>
-            <div className="flex mt-3">
-              Genres
-              <p className="sm:text-sm">
-                {genres.map((elem) => {
-                  const { id, name } = elem;
-                  return (
-                    <Badge key={id} className="bg-blue-500 text-white ml-2">
-                      {name}
-                    </Badge>
-                  );
-                })}
-              </p>
-            </div>
+            {genres === "" ? (
+              ""
+            ) : (
+              <div className="flex mt-3">
+                Genres
+                <p className="sm:text-sm">
+                  {genres.map((elem) => {
+                    const { id, name } = elem;
+                    return (
+                      <Badge key={id} className="bg-blue-500 text-white ml-2">
+                        {name}
+                      </Badge>
+                    );
+                  })}
+                </p>
+              </div>
+            )}
+
             <p className="text-lg sm:text-lg">
               Release at
               <span className="font-mono font-semibold ml-3 sm:text-lg">
@@ -221,7 +227,7 @@ const Dynamic_Movie = ({ id }) => {
                 <p className="my-3 text-lg text-left font-semibold sm:text-xl">
                   Production Companies are
                 </p>
-                <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-start sm:items-center sm:h-full">
+                <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-start sm:items-center sm:h-full md:grid md:grid-cols-4">
                   {production.map((elem) => {
                     const { id, logo_path, origin_country } = elem;
                     return (

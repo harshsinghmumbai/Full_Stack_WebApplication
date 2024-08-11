@@ -16,7 +16,8 @@ const MovieData = () => {
       Authorization: process.env.NEXT_PUBLIC_API_KEY,
     },
   };
-  const getMovieData = async () => {
+
+  async function getMovieData() {
     try {
       const response = await fetch(
         "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc",
@@ -27,9 +28,10 @@ const MovieData = () => {
       setloading(false);
       setMovie(data.results);
     } catch (err) {
-      console.log("Error during fetching api", err);
+      console.error(err);
     }
-  };
+  }
+
   useEffect(() => {
     getMovieData();
   }, []);
