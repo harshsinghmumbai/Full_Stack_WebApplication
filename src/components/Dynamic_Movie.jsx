@@ -116,27 +116,27 @@ const Dynamic_Movie = ({ id }) => {
                       <TooltipTrigger asChild>
                         <Toggle className="md:border md:border-gray-500">
                           <IoArrowBack
-                            className="text-xl md:text-2xl font-extrabold"
+                            className="text-xl md:text-2xl font-extrabold dark:text-white"
                             onClick={GoBack}
                           />
                         </Toggle>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Previous Page</p>
+                        <p className="dark:text-white">Previous Page</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                  <h1 className="text-xl font-semibold text-center sm:text-2xl">
+                  <h1 className="text-xl font-semibold text-center sm:text-2xl dark:text-white">
                     {data.original_name}
                   </h1>
                 </div>
-                <p className="mt-3 text-base text-gray-500 sm:text-lg">
+                <p className="mt-3 text-base text-gray-500 sm:text-lg dark:text-white">
                   {data.overview}
                 </p>
                 {genres === "" ? (
                   ""
                 ) : (
-                  <div className="flex mt-3">
+                  <div className="flex mt-3 dark:text-white">
                     Genres
                     <p className="sm:text-sm">
                       {genres.map((elem) => {
@@ -154,7 +154,7 @@ const Dynamic_Movie = ({ id }) => {
                   </div>
                 )}
 
-                <p className="text-lg sm:text-lg">
+                <p className="text-lg sm:text-lg dark:text-white">
                   Release at
                   <span className="font-mono font-semibold ml-3 sm:text-lg">
                     {data.first_air_date}
@@ -164,7 +164,7 @@ const Dynamic_Movie = ({ id }) => {
                   ""
                 ) : (
                   <div>
-                    <p className="my-3 text-lg text-left font-semibold sm:text-xl">
+                    <p className="my-3 text-lg text-left font-semibold sm:text-xl dark:text-white">
                       Creators of {data.original_name}
                     </p>
                     <div className="flex justify-around space-x-1">
@@ -197,7 +197,9 @@ const Dynamic_Movie = ({ id }) => {
                             {name === "Not Available" ? (
                               ""
                             ) : (
-                              <p className="sm:text-lg">{name}</p>
+                              <p className="sm:text-lg dark:text-white">
+                                {name}
+                              </p>
                             )}
                           </div>
                         );
@@ -205,7 +207,7 @@ const Dynamic_Movie = ({ id }) => {
                     </div>
                   </div>
                 )}
-                <div className="my-4 flex sm:text-lg">
+                <div className="my-4 flex sm:text-lg dark:text-white ">
                   Available languages
                   <p className="ml-2 space-x-1">
                     {lang.map((elem, index) => {
@@ -218,19 +220,19 @@ const Dynamic_Movie = ({ id }) => {
                     })}
                   </p>
                 </div>
-                <p className="sm:text-lg">
+                <p className="sm:text-lg dark:text-white">
                   Number of {data.original_name} Episodes :-
                   <span className="font-mono font-semibold ml-3 text-lg sm:text-xl">
                     {data.number_of_episodes}
                   </span>
                 </p>
-                <p className="sm:text-lg">
+                <p className="sm:text-lg dark:text-white">
                   Number of {data.original_name} Seasons :-
                   <span className="font-mono font-semibold ml-3 text-lg sm:text-xl">
                     {data.number_of_seasons}
                   </span>
                 </p>
-                <p className="sm:text-lg">
+                <p className="sm:text-lg dark:text-white">
                   {data.original_name} is Created in :-
                   <span className="font-mono font-semibold ml-3 text-lg sm:text-xl">
                     {data.origin_country}
@@ -240,7 +242,7 @@ const Dynamic_Movie = ({ id }) => {
                   ""
                 ) : (
                   <div>
-                    <p className="my-3 text-lg text-left font-semibold sm:text-xl">
+                    <p className="my-3 text-lg text-left font-semibold sm:text-xl dark:text-white">
                       Production Companies are
                     </p>
                     <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-start sm:items-center sm:h-full md:grid md:grid-cols-4">
@@ -258,7 +260,7 @@ const Dynamic_Movie = ({ id }) => {
                                 width={100}
                                 height={100}
                                 priority
-                                className="rounded-xl border border-gray-500 w-24 h-24 sm:w-40 sm:h-40 object-cover"
+                                className="rounded-xl border border-gray-500 w-24 h-24 sm:w-40 sm:h-40 object-cover bg-white"
                               />
                             ) : (
                               <Image
@@ -267,13 +269,13 @@ const Dynamic_Movie = ({ id }) => {
                                 width={100}
                                 height={100}
                                 priority
-                                className="rounded-xl border border-gray-500 w-24 h-24 sm:w-40 sm:h-40 object-contain"
+                                className="rounded-xl border border-gray-500 w-24 h-24 sm:w-40 sm:h-40 object-contain bg-white"
                               />
                             )}
                             {origin_country === "" ? (
                               "Not Available"
                             ) : (
-                              <p className="sm:text-lg">
+                              <p className="sm:text-lg dark:text-white">
                                 Origin in {origin_country}
                               </p>
                             )}
@@ -287,7 +289,7 @@ const Dynamic_Movie = ({ id }) => {
                   ""
                 ) : (
                   <div className="relative top-5 w-[350px] sm:w-[620px] md:w-[378px] lg:w-[580px] space-y-12">
-                    <p className="text-lg font-semibold sm:text-xl">
+                    <p className="text-lg font-semibold sm:text-xl dark:text-white">
                       Seasons of {data.original_name}
                     </p>
                     <Carousel
@@ -325,7 +327,7 @@ const Dynamic_Movie = ({ id }) => {
                               {name === "" ? (
                                 "Not Available"
                               ) : (
-                                <span className="sm:text-xs font-semibold">
+                                <span className="sm:text-xs font-semibold dark:text-white">
                                   {name}
                                 </span>
                               )}
@@ -344,13 +346,13 @@ const Dynamic_Movie = ({ id }) => {
                   ""
                 ) : (
                   <div className="my-5">
-                    <p className="text-lg text-left font-semibold sm:text-lg">
+                    <p className="text-lg text-left font-semibold sm:text-lg dark:text-white">
                       Production Countries are below
                     </p>
                     {productionCountry.map((elem, index) => {
                       const { name } = elem;
                       return (
-                        <p key={index} className="sm:text-lg">
+                        <p key={index} className="sm:text-lg dark:text-white">
                           {name}
                         </p>
                       );

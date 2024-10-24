@@ -4,7 +4,7 @@ const about = () => {
   const data = {
     title: "We're started at About Us",
     description:
-      " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+      "This page has been exclusively developed by Harsh Singh, an Web developer dedicated to creating engaging and functional webapp",
     image: "/Images/about.jpg",
   };
   return (

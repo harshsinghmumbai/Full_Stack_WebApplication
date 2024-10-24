@@ -6,7 +6,7 @@ export default function Home() {
   const data = {
     title: "We're started at Home Page",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+      "This Home Page is Created with Contribution of Harsh Singh ,Om Narayankar, Panchshila Kate and also Sharyu Devrukhakar All this Members",
     image: "/Images/home.webp",
   };
   return (

@@ -40,7 +40,7 @@ const Hero_Section = ({ NewData }) => {
                   <Image
                     src={image}
                     alt="Image"
-                    className="rounded-xl object-cover hover:scale-125 duration-500"
+                    className="rounded-xl object-cover hover:scale-125 duration-500 cursor-pointer"
                     width={900}
                     height={900}
                     priority
