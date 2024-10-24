@@ -31,7 +31,7 @@
   transform: rotateY(180deg);
 }
 .custom-shape-divider-bottom-1720449456 .shape-fill {
-  fill: white;
+  fill: gainsboro;
 }
 .btn {
   @apply mt-4 w-[80%] rounded-sm bg-black dark:bg-cyan-400 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black active:scale-110 transition ease-in-out;
